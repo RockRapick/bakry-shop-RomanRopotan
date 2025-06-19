@@ -14,13 +14,14 @@ import {navItems, productItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
+import SignIn from './components/SignIn/SignIn.tsx';
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(location.pathname === `/${Paths.ERROR}`)
+        if (location.pathname === `/${Paths.ERROR}`)
             navigate('/')
     }, []);
 
@@ -28,6 +29,7 @@ function App() {
         <Routes>
             {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
             {/*<Route path={Paths.HOME} element={<Navigator items={navItems}/>}>*/}
+            <Route path={'Login'} element={<SignIn/>}/>
             <Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>
                 <Route index element={<Home/>}/>
                 <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
