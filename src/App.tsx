@@ -15,7 +15,6 @@ import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import SignIn from './components/SignIn/SignIn.tsx';
-import Login from './components/servicePages/Login.tsx';
 
 function App() {
     const location = useLocation();
@@ -26,11 +25,14 @@ function App() {
             navigate('/')
     }, []);
 
+    const dataLogin = (data:object)=>{
+        console.log(JSON.stringify(data))
+    }
+
     return (
         <Routes>
             {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
             {/*<Route path={Paths.HOME} element={<Navigator items={navItems}/>}>*/}
-            <Route path={'Login'} element={<SignIn/>}/>
             <Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>
                 <Route index element={<Home/>}/>
                 <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
@@ -45,7 +47,7 @@ function App() {
                 </Route>
             </Route>
             <Route path={'*'} element={<ErrorPage/>}/>
-            <Route path={Paths.LOGIN} element={<Login/>}/>
+            <Route path={Paths.SIGNING} element={<SignIn dataLogin={dataLogin}/>}/>
         </Routes>
     )
 }

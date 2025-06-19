@@ -1,8 +1,12 @@
-import SignIn from "../SignIn/SignIn.tsx";
+import {Paths} from "../../utils/paths.ts";
+import {useNavigate} from "react-router-dom";
+
 
 const Login = () => {
+    const navigate = useNavigate();
     return (
-        <SignIn/>
+        <button className={'login'} onClick={() => navigate('/' + Paths.SIGNING)}>Sign In</button>
+
     );
 };
 

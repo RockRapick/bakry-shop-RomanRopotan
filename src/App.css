@@ -1,26 +1,50 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
-.nav-list{
-  display: flex;
-  justify-content: center;
-  font-size: 1.2rem;
-  list-style: none;
-}
-.nav-list li{
-  margin-right: 2rem;
-  text-decoration: none;
+.nav-list {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    list-style: none;
 }
 
-.active{
-  color:orange;
-  font-size: 1.3rem;
+.nav-list li {
+    margin-right: 2rem;
+    text-decoration: none;
 }
-.sub{
-  flex-direction: column;
-  align-items: start;
+
+.active {
+    color: orange;
+    font-size: 1.3rem;
+}
+
+.sub {
+    flex-direction: column;
+    align-items: start;
+}
+
+.login {
+    position: absolute;
+    right: 2rem;
+    top: 0.7rem;
+    align-items: end;
+    color: #828282;
+    border-radius: 20px;
+    background-color: #d2d2d2;
+    padding: 5px 18px 5px 18px;
+    border: #d2d2d2;
+
+}
+
+.login:hover {
+    background-color: #e6e6e6;
+    color: #1975d1;
+}
+
+.login:active {
+    background-color: #1975d1;
 }

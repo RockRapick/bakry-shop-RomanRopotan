@@ -59,7 +59,12 @@ const SignInContainer = styled(Stack)(({theme}) => ({
     },
 }));
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
+
+
+export default function SignIn(props: {
+    disableCustomTheme?: boolean,
+    dataLogin: (data: object) => void
+}) {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
@@ -74,12 +79,14 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         setOpen(false);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = ( event: React.FormEvent<HTMLFormElement>) => {
         if (emailError || passwordError) {
             event.preventDefault();
             return;
         }
         const data = new FormData(event.currentTarget);
+        console.log(data)
+        props.dataLogin(data);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
