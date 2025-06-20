@@ -12,10 +12,10 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import {styled} from '@mui/material/styles';
 import ForgotPassword from "./ForgotPassword.tsx"
-
 import AppTheme from './AppTheme';
 import ColorModeSelect from './ColorModeSelect';
 import {GoogleIcon} from './components/CustomIcons';
+import type {LoginData} from "../../utils/shop-types.ts";
 
 const Card = styled(MuiCard)(({theme}) => ({
     display: 'flex',
@@ -63,7 +63,7 @@ const SignInContainer = styled(Stack)(({theme}) => ({
 
 export default function SignIn(props: {
     disableCustomTheme?: boolean,
-    dataLogin: (data: object) => void
+    dataLogin: (data: LoginData) => void
 }) {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
@@ -92,7 +92,7 @@ export default function SignIn(props: {
             password: data.get('password'),
         });
     };
-
+//=================== Validation
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
         const password = document.getElementById('password') as HTMLInputElement;
@@ -119,7 +119,7 @@ export default function SignIn(props: {
 
         return isValid;
     };
-
+//=======================================
     return (
         <AppTheme {...props}>
             <CssBaseline enableColorScheme/>
@@ -210,7 +210,7 @@ export default function SignIn(props: {
                         <Typography sx={{textAlign: 'center'}}>
                             Don&apos;t have an account?{' '}
                             <Link
-                                // href="/material-ui/getting-started/templates/sign-in/"
+                                href="#"
                                 variant="body2"
                                 sx={{alignSelf: 'center'}}
                             >
