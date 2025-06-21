@@ -29,12 +29,17 @@ function App() {
     }, []);
 
     const predicate = (item:RouteType) => {
+        const isAdmin = authUser && authUser.includes('admin');
+
         return (
+            item.path !== Paths.CART || !isAdmin
+        ) && (
             item.role === Roles.ALL ||
-            item.role === Roles.USER && authUser||
-            item.role === Roles.ADMIN && authUser && authUser.includes('admin')||
+            item.role === Roles.USER && authUser ||
+            item.role === Roles.ADMIN && isAdmin ||
             item.role === Roles.NO_AUTH && !authUser
-        )
+        );
+
     }
 
     const getRoutes = () => {
