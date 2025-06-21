@@ -1,12 +1,21 @@
-import {Paths} from "../../utils/paths.ts";
-import {useNavigate} from "react-router-dom";
 
+import type {LoginData} from "../../utils/shop-types.ts";
+import {useAppDispatch} from "../../redux/hooks.ts";
+import {loginAction} from "../../redux/slices/authSlice.ts";
+import SignInForm from "../templates/SignIn/SignIn.tsx";
 
 const Login = () => {
-    const navigate = useNavigate();
-    return (
-        <button className={'login'} onClick={() => navigate('/' + Paths.SIGNING)}>Sign In</button>
+    const dispatch = useAppDispatch();
+    const submitFn = (loginData: LoginData)=> {
+        // console.log(JSON.stringify(loginData))
+        dispatch(loginAction(loginData.email))
+    }
 
+
+    return (
+        <div>
+            <SignInForm submitFn={submitFn}/>
+        </div>
     );
 };
 

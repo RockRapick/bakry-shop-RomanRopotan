@@ -14,39 +14,32 @@ import {navItems, productItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
-import SignIn from './components/SignIn/SignIn.tsx';
-import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
-import {loginAction} from "./redux/slices/authSlice.ts";
-import {type LoginData, Roles, type RouteType} from "./utils/shop-types.ts";
+import Login from "./components/servicePages/Login.tsx";
+import {Roles, type RouteType} from "./utils/shop-types.ts";
+import {useAppSelector} from "./redux/hooks.ts";
+import Logout from './components/servicePages/LogOut.tsx';
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
-    const {authUser} = useAppSelector(state => state.auth);
-
+    const {authUser} = useAppSelector(state => state.auth)
     useEffect(() => {
-        if (location.pathname === `/${Paths.ERROR}`)
+        if(location.pathname === `/${Paths.ERROR}`)
             navigate('/')
     }, []);
 
-    const predicate = (item:RouteType)=>{
-        return(
+    const predicate = (item:RouteType) => {
+        return (
             item.role === Roles.ALL ||
-                item.role === Roles.USER&&authUser||
-                item.role === Roles.ADMIN&&authUser&&authUser.includes('admin')||
-                item.role === Roles.NO_AUTH&&!authUser
+            item.role === Roles.USER && authUser||
+            item.role === Roles.ADMIN && authUser && authUser.includes('admin')||
+            item.role === Roles.NO_AUTH && !authUser
         )
     }
 
-    const getRoutes = () =>{
-        return navItems.filter(item=>predicate(item))
+    const getRoutes = () => {
+        return navItems.filter(item => predicate(item))
     }
-//==========to login
-    const dispatch = useAppDispatch();
-    const dataLogin = (data:LoginData)=>{
-        dispatch(loginAction(data.email));
-    }
-//=============
     return (
         <Routes>
             {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
@@ -59,14 +52,15 @@ function App() {
                 <Route path={Paths.CART} element={<ShoppingCart/>}/>
                 {/*<Route path={Paths.PRODUCTS} element={<Products/>}/>*/}
                 {/*<Route path={Paths.PRODUCTS} element={<ProductLayout/>}>*/}
-                <Route path={Paths.PRODUCTS} element={<NavigatorDeskTop items={productItems} sub={'sub'}/>}>
+                <Route path={Paths.PRODUCTS} element={<NavigatorDeskTop items={productItems}/>}>
                     <Route path={Paths.BREAD} element={<Bread/>}/>
                     <Route path={Paths.DAIRY} element={<Dairy/>}/>
                     <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
                 </Route>
+                <Route path={Paths.LOGIN} element={<Login/>}/>
+                <Route path={Paths.LOGOUT} element={<Logout/>}/>
             </Route>
             <Route path={'*'} element={<ErrorPage/>}/>
-            <Route path={Paths.SIGNING} element={<SignIn dataLogin={dataLogin}/>}/>
         </Routes>
     )
 }
