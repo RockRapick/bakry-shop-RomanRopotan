@@ -14,10 +14,11 @@ import {navItems, productItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
-import Login from "./components/servicePages/Login.tsx";
+import SignIn from "./components/servicePages/SignIn.tsx";
 import {Roles, type RouteType} from "./utils/shop-types.ts";
 import {useAppSelector} from "./redux/hooks.ts";
 import Logout from './components/servicePages/LogOut.tsx';
+import SignUp from "./components/servicePages/SignUp.tsx";
 
 function App() {
     const location = useLocation();
@@ -62,7 +63,8 @@ function App() {
                     <Route path={Paths.DAIRY} element={<Dairy/>}/>
                     <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
                 </Route>
-                <Route path={Paths.LOGIN} element={<Login/>}/>
+                <Route path={Paths.SIGNIN} element={<SignIn/>}/>
+                <Route path={Paths.SIGNUP} element={<SignUp/>}/>
                 <Route path={Paths.LOGOUT} element={<Logout/>}/>
             </Route>
             <Route path={'*'} element={<ErrorPage/>}/>

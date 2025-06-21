@@ -4,7 +4,7 @@ import {useAppDispatch} from "../../redux/hooks.ts";
 import {loginAction} from "../../redux/slices/authSlice.ts";
 import SignInForm from "../templates/SignIn/SignIn.tsx";
 
-const Login = () => {
+const SignIn = () => {
     const dispatch = useAppDispatch();
     const submitFn = (loginData: LoginData)=> {
         // console.log(JSON.stringify(loginData))
@@ -15,8 +15,9 @@ const Login = () => {
     return (
         <div>
             <SignInForm submitFn={submitFn}/>
+
         </div>
     );
 };
 
-export default Login;
+export default SignIn;

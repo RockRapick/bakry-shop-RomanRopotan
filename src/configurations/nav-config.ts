@@ -7,7 +7,7 @@ export const navItems: RouteType[] = [
     {path: Paths.CART, title: "Shopping Cart",role:Roles.USER},
     {path: Paths.CUSTOMERS, title: "Customers",role:Roles.ADMIN},
     {path: Paths.PRODUCTS, title: "Products",role:Roles.ALL},
-    {path: Paths.LOGIN, title: "Log In",role:Roles.NO_AUTH},
+    {path: Paths.SIGNIN, title: "Log In",role:Roles.NO_AUTH},
     {path: Paths.LOGOUT, title: "Log Out",role:Roles.USER},
 
 ]

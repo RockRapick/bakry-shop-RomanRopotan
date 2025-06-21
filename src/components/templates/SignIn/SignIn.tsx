@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import {styled} from '@mui/material/styles';
-import {GoogleIcon, SitemarkIcon} from './CustomIcons.tsx';
+import {GoogleIcon} from '../CustomIcons.tsx';
 import type {LoginData} from "../../../utils/shop-types.ts";
 
 const Card = styled(MuiCard)(({theme}) => ({
@@ -99,7 +99,7 @@ export default function SignInForm(props: Props) {
     return (
         <SignInContainer direction="column" justifyContent="space-between">
             <Card variant="outlined">
-                <SitemarkIcon/>
+                {/*<SitemarkIcon/>*/}
                 <Typography
                     component="h1"
                     variant="h4"
@@ -178,7 +178,7 @@ export default function SignInForm(props: Props) {
                     <Typography sx={{textAlign: 'center'}}>
                         Don&apos;t have an account?{' '}
                         <Link
-                            href="#"
+                            href="/signup"
                             variant="body2"
                             sx={{alignSelf: 'center'}}
                         >
