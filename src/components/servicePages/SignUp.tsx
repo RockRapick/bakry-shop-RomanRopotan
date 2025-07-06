@@ -22,7 +22,7 @@ const SignUp = () => {
     }
     return (
         <div>
-            {<SignUpForm submitFunc={signUpWithEmail}/>}
+            {<SignUpForm submitFn={signUpWithEmail}/>}
         </div>
     );
 };

@@ -19,11 +19,12 @@ export type LoginData = {
     password: string,
 }
 
+
 export type SignupData = {
     firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
+    lastName:string,
+    email:string,
+    password:string
 }
 
 export type ProductType = {

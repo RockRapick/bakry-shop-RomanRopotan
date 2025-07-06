@@ -13,10 +13,10 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import {styled} from '@mui/material/styles';
 import {GoogleIcon,} from '../CustomIcons.tsx';
-import type {LoginData, SignupData} from "../../../utils/shop-types.ts";
+import type {SignupData} from "../../../utils/shop-types.ts";
 
 
-const Card = styled(MuiCard)(({ theme }) => ({
+const Card = styled(MuiCard)(({theme}) => ({
     display: 'flex',
     flexDirection: 'column',
     alignSelf: 'center',
@@ -30,7 +30,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 
 }));
 
-const SignUpContainer = styled(Stack)(({ theme }) => ({
+const SignUpContainer = styled(Stack)(({theme}) => ({
     height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
     minHeight: '100%',
     padding: theme.spacing(2),
@@ -42,7 +42,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 type Props = {
-    submitFn: (loginData:SignupData) => void
+    submitFn: (data: SignupData) => void
 }
 
 export default function SignUpForm(props: Props) {
@@ -97,111 +97,111 @@ export default function SignUpForm(props: Props) {
         }
         const data = new FormData(event.currentTarget);
         props.submitFn({
-            firstName: data.get('name'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
+            firstName: data.get('name') as string,
+            lastName: data.get('lastName') as string,
+            email: data.get('email') as string,
+            password: data.get('password') as string,
         });
     };
 
     return (
 
 
-            <SignUpContainer direction="column" justifyContent="space-between">
-                <Card variant="outlined">
-                    {/*<SitemarkIcon />*/}
-                    <Typography
-                        component="h1"
-                        variant="h4"
-                        sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+        <SignUpContainer direction="column" justifyContent="space-between">
+            <Card variant="outlined">
+                {/*<SitemarkIcon />*/}
+                <Typography
+                    component="h1"
+                    variant="h4"
+                    sx={{width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)'}}
+                >
+                    Sign up
+                </Typography>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{display: 'flex', flexDirection: 'column', gap: 2}}
+                >
+                    <FormControl>
+                        <FormLabel htmlFor="name">Full name</FormLabel>
+                        <TextField
+                            autoComplete="name"
+                            name="name"
+                            required
+                            fullWidth
+                            id="name"
+                            placeholder="Jon Snow"
+                            error={nameError}
+                            helperText={nameErrorMessage}
+                            color={nameError ? 'error' : 'primary'}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <TextField
+                            required
+                            fullWidth
+                            id="email"
+                            placeholder="your@email.com"
+                            name="email"
+                            autoComplete="email"
+                            variant="outlined"
+                            error={emailError}
+                            helperText={emailErrorMessage}
+                            color={passwordError ? 'error' : 'primary'}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="password">Password</FormLabel>
+                        <TextField
+                            required
+                            fullWidth
+                            name="password"
+                            placeholder="••••••"
+                            type="password"
+                            id="password"
+                            autoComplete="new-password"
+                            variant="outlined"
+                            error={passwordError}
+                            helperText={passwordErrorMessage}
+                            color={passwordError ? 'error' : 'primary'}
+                        />
+                    </FormControl>
+                    <FormControlLabel
+                        control={<Checkbox value="allowExtraEmails" color="primary"/>}
+                        label="I want to receive updates via email."
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        onClick={validateInputs}
                     >
                         Sign up
-                    </Typography>
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit}
-                        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                    </Button>
+                </Box>
+                <Divider>or</Divider>
+                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        onClick={() => alert('Sign up with Google')}
+                        startIcon={<GoogleIcon/>}
                     >
-                        <FormControl>
-                            <FormLabel htmlFor="name">Full name</FormLabel>
-                            <TextField
-                                autoComplete="name"
-                                name="name"
-                                required
-                                fullWidth
-                                id="name"
-                                placeholder="Jon Snow"
-                                error={nameError}
-                                helperText={nameErrorMessage}
-                                color={nameError ? 'error' : 'primary'}
-                            />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel htmlFor="email">Email</FormLabel>
-                            <TextField
-                                required
-                                fullWidth
-                                id="email"
-                                placeholder="your@email.com"
-                                name="email"
-                                autoComplete="email"
-                                variant="outlined"
-                                error={emailError}
-                                helperText={emailErrorMessage}
-                                color={passwordError ? 'error' : 'primary'}
-                            />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel htmlFor="password">Password</FormLabel>
-                            <TextField
-                                required
-                                fullWidth
-                                name="password"
-                                placeholder="••••••"
-                                type="password"
-                                id="password"
-                                autoComplete="new-password"
-                                variant="outlined"
-                                error={passwordError}
-                                helperText={passwordErrorMessage}
-                                color={passwordError ? 'error' : 'primary'}
-                            />
-                        </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="allowExtraEmails" color="primary" />}
-                            label="I want to receive updates via email."
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            onClick={validateInputs}
+                        Sign up with Google
+                    </Button>
+                    <Typography sx={{textAlign: 'center'}}>
+                        Already have an account?{' '}
+                        <Link
+                            href="/signin"
+                            variant="body2"
+                            sx={{alignSelf: 'center'}}
                         >
-                            Sign up
-                        </Button>
-                    </Box>
-                    <Divider>or</Divider>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        <Button
-                            fullWidth
-                            variant="outlined"
-                            onClick={() => alert('Sign up with Google')}
-                            startIcon={<GoogleIcon />}
-                        >
-                            Sign up with Google
-                        </Button>
-                        <Typography sx={{ textAlign: 'center' }}>
-                            Already have an account?{' '}
-                            <Link
-                                href="/signin"
-                                variant="body2"
-                                sx={{ alignSelf: 'center' }}
-                            >
-                                Sign in
-                            </Link>
-                        </Typography>
-                    </Box>
-                </Card>
-            </SignUpContainer>
+                            Sign in
+                        </Link>
+                    </Typography>
+                </Box>
+            </Card>
+        </SignUpContainer>
     );
 }
