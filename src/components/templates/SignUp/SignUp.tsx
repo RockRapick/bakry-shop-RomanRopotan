@@ -13,6 +13,7 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import {styled} from '@mui/material/styles';
 import {GoogleIcon,} from '../CustomIcons.tsx';
+import type {LoginData, SignupData} from "../../../utils/shop-types.ts";
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -40,7 +41,11 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 
 }));
 
-export default function SignUpForm() {
+type Props = {
+    submitFn: (loginData:SignupData) => void
+}
+
+export default function SignUpForm(props: Props) {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
@@ -91,8 +96,8 @@ export default function SignUpForm() {
             return;
         }
         const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
+        props.submitFn({
+            firstName: data.get('name'),
             lastName: data.get('lastName'),
             email: data.get('email'),
             password: data.get('password'),
