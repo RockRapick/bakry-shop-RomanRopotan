@@ -1,7 +1,7 @@
 import type {LoginData} from "../../utils/shop-types.ts";
 import {useAppDispatch} from "../../redux/hooks.ts";
 import {loginAction} from "../../redux/slices/authSlice.ts";
-import SignInForm from "../templates/SignIn/SignIn.tsx";
+import SignInForm from "../templates/SignIn/SignInForm.tsx";
 import {login} from "../../firebase/firebaseAuthSevice.ts";
 import {useNavigate} from "react-router-dom";
 
@@ -16,8 +16,12 @@ const SignIn = () => {
 
     const loginWithFirebase = async (loginData: LoginData) => {
         try {
-            const email = await login(loginData);
-            dispatch(loginAction(email));
+            const userData = await login(loginData);
+            const user = {
+                email: loginData.email,
+                name: userData?.displayName || 'Anonymous',
+            }
+            dispatch(loginAction(user));
             navigate("/");
         } catch (e) {
             console.log(e);//Todo

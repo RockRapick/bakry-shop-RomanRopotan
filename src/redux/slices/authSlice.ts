@@ -1,11 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 type AuthState = {
-    authUser: string
+    authUser: string,
+    userName: string
 }
 
 const initialState: AuthState = {
     authUser: "",
+    userName: "",
 }
 
 const authSlice = createSlice({
@@ -13,10 +15,15 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         loginAction: (state, action) => {
-            state.authUser = action.payload || '';
+            state.authUser = action.payload.email || '';
+            if (state.authUser.includes('admin'))
+                state.userName = "ADMIN"
+            else
+                state.userName = action.payload.name || '';
         },
         logoutAction: (state) => {
             state.authUser = '';
+            state.userName = '';
         }
     }
 

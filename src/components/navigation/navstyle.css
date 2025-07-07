@@ -1,0 +1,17 @@
+.btnUser{
+    position: absolute;
+    right: 1rem;
+    top:  0.8rem;
+    color: #636363;
+    font-size: 1rem;
+    border: none;
+    background-color: unset;
+}
+.btnUser:hover{
+    color: black;
+    font-size: 1.1rem;
+}
+.btnUser:active{
+    color: white;
+    font-size: 0.9rem;
+}

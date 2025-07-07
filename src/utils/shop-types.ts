@@ -21,8 +21,7 @@ export type LoginData = {
 
 
 export type SignupData = {
-    firstName: string,
-    lastName:string,
+    fullName: string,
     email:string,
     password:string
 }
