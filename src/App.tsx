@@ -15,21 +15,35 @@ import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import SignIn from "./components/servicePages/SignIn.tsx";
-import {Roles, type RouteType} from "./utils/shop-types.ts";
-import {useAppSelector} from "./redux/hooks.ts";
+import {type ProductType, Roles, type RouteType} from "./utils/shop-types.ts";
+import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
 import Logout from './components/servicePages/LogOut.tsx';
 import SignUp from "./components/servicePages/SignUp.tsx";
+import {getProducts} from "./firebase/firebaseDBService.ts";
+import {prodsUpd} from "./redux/slices/productSlice.ts";
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const {authUser} = useAppSelector(state => state.auth)
     useEffect(() => {
-        if(location.pathname === `/${Paths.ERROR}`)
+        if (location.pathname === `/${Paths.ERROR}`)
             navigate('/')
     }, []);
 
-    const predicate = (item:RouteType) => {
+    useEffect(() => {
+        const subscription = getProducts().subscribe({
+            next: (prods: ProductType[]) => {
+                dispatch(prodsUpd(prods));
+            }
+        });
+        return () => {
+            subscription.unsubscribe()
+        };
+    }, []);
+
+    const predicate = (item: RouteType) => {
         const isAdmin = authUser && authUser.includes('admin');
 
         return (
