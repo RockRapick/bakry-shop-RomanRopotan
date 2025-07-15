@@ -8,7 +8,7 @@ import Orders from "./components/Orders.tsx";
 import ShoppingCart from "./components/ShoppingCart.tsx";
 //import ProductLayout from "./components/navigation/ProductLayout.tsx";
 import Dairy from "./components/Dairy.tsx";
-import Bread from "./components/Bread.tsx";
+import Bread from "./components/Bread/Bread.tsx";
 //import Navigator from "./components/navigation/Navigator.tsx";
 import {navItems, productItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";

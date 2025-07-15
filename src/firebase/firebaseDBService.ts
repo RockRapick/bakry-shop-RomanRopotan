@@ -17,7 +17,7 @@ const prodColl = collection(db, 'product_collection');
 const categoryColl = collection(db, 'category_collection');
 
 export const addProduct = async (product: ProductType) => {
-    product.id = getRandomNumber(10000, 9999) + "";
+    product.id = getRandomNumber(10000, 99999) + "";
     const ref = doc(prodColl, product.id);
     await setDoc(ref, product);
 }
@@ -61,10 +61,10 @@ export const setProducts = async () => {
         const products: ProductType[] = productConfig.map(item => (
             {
                 title: item.name,
-                category: item.name.split('-')[0],
+                category: item.name.split("-")[0],
                 unit: item.unit,
                 cost: item.cost,
-                img: item.name + '.jpg',
+                img: item.name + ".jpg",
             }
         ));
         for (let i = 0; i < products.length; i++) {
