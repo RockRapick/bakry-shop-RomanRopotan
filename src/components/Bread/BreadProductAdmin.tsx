@@ -4,10 +4,7 @@ import {Avatar, Box} from "@mui/material";
 
 
 const BreadProductAdmin = () => {
-    const {currProds} = useAppSelector(state => state.products);
-
-
-    const rows = currProds;
+    const rows = useAppSelector(state => state.products.currProds);
     const colums: GridColDef<(typeof rows)[number]>[] = [
         {field: 'id', headerName: 'ID', width: 90, flex: 0.3},
         {field: 'title', headerName: 'Product Name', width: 150, flex: 1},
@@ -22,6 +19,7 @@ const BreadProductAdmin = () => {
             }
         },
     ]
+
     return (
         <Box>
             <DataGrid columns={colums} rows={rows}/>
