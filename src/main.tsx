@@ -9,7 +9,6 @@ import {setProducts} from "./firebase/firebaseDBService.ts";
 
 
 setProducts().then(() => {
-
     createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
             <BrowserRouter>

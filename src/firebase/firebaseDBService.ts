@@ -4,7 +4,8 @@ import {
     getDoc,
     setDoc,
     deleteDoc,
-    getCountFromServer
+    getCountFromServer,
+    getDocs
 } from 'firebase/firestore';
 import {db} from "../configurations/firebase-config.ts";
 import type {Category, ProductType} from "../utils/shop-types.ts";
@@ -50,7 +51,7 @@ export const getProduct = async (id: string) => {
 }
 
 export const isCategoryExists = async (name: string) => {
-    const ref = doc(prodColl, name);
+    const ref = doc(categoryColl, name);
     const res = await getDoc(ref);
     return res.exists();
 }
@@ -81,4 +82,16 @@ export const setProducts = async () => {
 
 export const getProducts = (): Observable<ProductType[]> => {
     return collectionData(prodColl) as Observable<ProductType[]>;
+}
+
+export const getAllCategory = async () => {
+    const ref = await getDocs(categoryColl);
+    console.log('Getting categories...' );
+    ref.forEach(elem => {
+        console.log('category = '+elem.id)
+
+    })
+    console.log(ref.docs)
+
+    return ref.docs;
 }
