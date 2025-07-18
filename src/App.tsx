@@ -15,12 +15,14 @@ import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import {useEffect} from "react";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import SignIn from "./components/servicePages/SignIn.tsx";
-import {type ProductType, Roles, type RouteType} from "./utils/shop-types.ts";
+import {type ProductType, Roles, type RouteType, ShopCartProdType} from "./utils/shop-types.ts";
 import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
 import Logout from './components/servicePages/LogOut.tsx';
 import SignUp from "./components/servicePages/SignUp.tsx";
 import {getProducts} from "./firebase/firebaseDBService.ts";
 import {prodsUpd} from "./redux/slices/productSlice.ts";
+import {resetCart, setCart} from "./redux/slices/cartSlice.ts";
+import {getCartProducts} from "./firebase/firebaseCartService.ts";
 
 function App() {
     const location = useLocation();
@@ -41,6 +43,16 @@ function App() {
         return () => {
             subscription.unsubscribe()
         };
+    }, []);
+    useEffect(() => {
+        if (!authUser || authUser.includes('admin'))
+            dispatch(resetCart());
+        else {
+            const subscription = getCartProducts(`$${authUser}_collection`)
+            subscription.subscribe({
+                next: (cartProduct: ShopCartProdType[]) => dispatch(setCart(cartProduct))
+            })
+        }
     }, []);
 
     const predicate = (item: RouteType) => {
