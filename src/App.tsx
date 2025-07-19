@@ -54,7 +54,7 @@ function App() {
             })
         }
 
-    }, []);
+    }, [authUser]);
 
     const predicate = (item: RouteType) => {
         const isAdmin = authUser && authUser.includes('admin');

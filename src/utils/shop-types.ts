@@ -22,8 +22,8 @@ export type LoginData = {
 
 export type SignupData = {
     fullName: string,
-    email:string,
-    password:string
+    email: string,
+    password: string
 }
 
 export type ProductType = {
@@ -45,3 +45,5 @@ export type ShopCartProdType = {
     count: number;
 
 }
+
+export type TableShopCartDataType = ProductType & { count: number, amount: number }
