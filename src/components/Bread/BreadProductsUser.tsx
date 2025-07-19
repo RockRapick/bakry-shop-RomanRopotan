@@ -33,7 +33,7 @@ const BreadProductsUser = () => {
                                 if (!autUser) {
                                     navigate('/signin');
                                 }
-                                await addProductUnitToCart(`${autUser}_collection`, item.id!)
+                                await addProductUnitToCart(`${autUser!}_collection`, item.id!)
                             }}>+</Button>
                             <Typography>0</Typography>
                             <Button size="small">-</Button>

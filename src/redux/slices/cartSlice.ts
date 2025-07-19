@@ -1,11 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ShopCartProdType} from "../../utils/shop-types.ts";
-
-
-const initialState: { cartProduct: ShopCartProdType } = {
-    cartProducts: [],
+const initialState: {cartProducts:ShopCartProdType[]} = {
+    cartProducts: []
 }
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
@@ -14,10 +11,9 @@ const cartSlice = createSlice({
             state.cartProducts = action.payload;
         },
         resetCart: (state) => {
-            state.cartProducts = [];
+            state.cartProducts = []
         }
     }
 })
-
-export const { setCart, resetCart } = cartSlice.actions;
+export const {setCart, resetCart} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
