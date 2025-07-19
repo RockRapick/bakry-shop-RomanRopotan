@@ -45,6 +45,6 @@ export const removeProductUnitFromCart = async (collName: string, id: string) =>
 
 }
 
-export const getCartProducts = async (collName: string): Promise<Observable<ShopCartProdType[]>> => {
-    return collectionData(collection(db, collName)) as Observable<ShopCartProdType[]>;
+export const getCartProducts = (collName:string):Observable<ShopCartProdType[]> => {
+    return  collectionData(collection(db, collName)) as Observable<ShopCartProdType[]>
 }

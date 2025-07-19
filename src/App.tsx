@@ -28,7 +28,7 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const {authUser} = useAppSelector(state => state.auth)
+    const authUser = useAppSelector(state => state.auth.authUser)
     useEffect(() => {
         if (location.pathname === `/${Paths.ERROR}`)
             navigate('/')
@@ -45,14 +45,15 @@ function App() {
         };
     }, []);
     useEffect(() => {
-        if (!authUser || authUser.includes('admin'))
+        if(!authUser || authUser.includes('admin'))
             dispatch(resetCart());
-        else {
-            const subscription = getCartProducts(`$${authUser}_collection`)
-            subscription.subscribe({
-                next: (cartProduct: ShopCartProdType[]) => dispatch(setCart(cartProduct))
+        else{
+            const subscribtion = getCartProducts(`${authUser}_collection`);
+            subscribtion.subscribe({
+                next: (cartProducts: ShopCartProdType[])=> dispatch(setCart(cartProducts))
             })
         }
+
     }, []);
 
     const predicate = (item: RouteType) => {

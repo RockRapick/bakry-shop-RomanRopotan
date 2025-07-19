@@ -7,7 +7,7 @@ export const store = configureStore({
     reducer: {
         'auth': authReducer,
         'products':prodsReducer,
-        'cart':cartReducer(),
+        'cart':cartReducer,
     }
 })
 export type RootState = ReturnType<typeof store.getState>

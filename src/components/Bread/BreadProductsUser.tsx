@@ -31,7 +31,7 @@ const BreadProductsUser = () => {
                         <CardActions>
                             <Button size="small" onClick={async () => {
                                 if (!autUser) {
-                                    navigate("/login")
+                                    navigate('/signin');
                                 }
                                 await addProductUnitToCart(`${autUser}_collection`, item.id!)
                             }}>+</Button>
