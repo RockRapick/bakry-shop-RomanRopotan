@@ -5,34 +5,28 @@ import SignInForm from "../templates/SignIn/SignInForm.tsx";
 import {login} from "../../firebase/firebaseAuthSevice.ts";
 import {useNavigate} from "react-router-dom";
 
+
 const SignIn = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    // const submitFn = (loginData: LoginData) => {
-    //     // console.log(JSON.stringify(loginData))
+    const navigate = useNavigate()
+
+    // const submitFn = (loginData: LoginData)=> {
+    //      console.log(JSON.stringify(loginData))
     //     dispatch(loginAction(loginData.email))
     // }
-
-
-    const loginWithFirebase = async (loginData: LoginData) => {
-        try {
-            const userData = await login(loginData);
-            const user = {
-                email: loginData.email,
-                name: userData?.displayName || 'Anonymous',
-            }
+    const loginWithFirebase = async (loginData:LoginData) => {
+        try{
+            const user = await login(loginData);
             dispatch(loginAction(user));
-            navigate("/");
-        } catch (e) {
-            console.log(e);//Todo
+            navigate('/');
+        }catch (e) {
+            console.log(e) //Todo
         }
     }
-
 
     return (
         <div>
             <SignInForm submitFn={loginWithFirebase}/>
-
         </div>
     );
 };
