@@ -1,33 +1,25 @@
 import {createSlice} from "@reduxjs/toolkit";
-
 type AuthState = {
-    authUser: string,
-    userName: string
+    authUser: {
+        email:string,
+        displayName:string
+    } | null
 }
-
-const initialState: AuthState = {
-    authUser: "",
-    userName: "",
+const initialState:AuthState = {
+    authUser: null
 }
-
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
+    reducers:{
         loginAction: (state, action) => {
-            state.authUser = action.payload.email || '';
-            if (state.authUser.includes('admin'))
-                state.userName = "ADMIN"
-            else
-                state.userName = action.payload.name || '';
+            state.authUser = action.payload
         },
         logoutAction: (state) => {
-            state.authUser = '';
-            state.userName = '';
+            state.authUser = null
         }
     }
-
-})
+});
 
 export const {loginAction, logoutAction} = authSlice.actions;
 export const authReducer = authSlice.reducer;

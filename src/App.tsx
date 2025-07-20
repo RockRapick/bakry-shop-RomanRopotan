@@ -45,10 +45,10 @@ function App() {
         };
     }, []);
     useEffect(() => {
-        if(!authUser || authUser.includes('admin'))
+        if(!authUser || authUser.email.includes('admin'))
             dispatch(resetCart());
         else{
-            const subscribtion = getCartProducts(`${authUser}_collection`);
+            const subscribtion = getCartProducts(`${authUser.email}_collection`);
             subscribtion.subscribe({
                 next: (cartProducts: ShopCartProdType[])=> dispatch(setCart(cartProducts))
             })
@@ -57,7 +57,7 @@ function App() {
     }, [authUser]);
 
     const predicate = (item: RouteType) => {
-        const isAdmin = authUser && authUser.includes('admin');
+        const isAdmin = authUser && authUser.email.includes('admin');
 
         return (
             item.path !== Paths.CART || !isAdmin
